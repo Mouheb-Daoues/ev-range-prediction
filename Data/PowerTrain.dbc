@@ -1,0 +1,931 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: BATTDOC SCCM BMS IC ESC PEDAL ENGINE
+VAL_TABLE_ vtSpeedControlMode 1 "ON" 0 "OFF" ;
+VAL_TABLE_ vtOperation 2 "RUN" 1 "LIVING" 0 "OFF" ;
+VAL_TABLE_ vtBatteryState 7 "INTERNAL_FAILURE" 6 "CHARGE_STATE_FULL" 5 "CHARGE_STATE_NORMAL" 4 "CHARGE_STATE_CRITICAL" 3 "FATAL_BYPASSED" 2 "FATAL_SHORTCUT" 1 "FATAL_DEEPLY_DISCHARGED" 0 "LOCKED" ;
+VAL_TABLE_ vtBypassed 1 "BRIDGED" 0 "NORMAL" ;
+VAL_TABLE_ vtBalance 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_TABLE_ vtAlarm 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_TABLE_ vtDriveMode 255 "ERROR" 3 "DRIVE" 2 "NEUTRAL" 1 "REVERSE" 0 "PARKING" ;
+VAL_TABLE_ vtRecuperationLevel 255 "ERROR" 2 "maximum" 1 "medium" 0 "none" ;
+VAL_TABLE_ vtAgility 255 "ERROR" 2 "SPORT" 1 "COMFORT" 0 "ECO" ;
+
+
+BO_ 13 frmAddInfo: 4 ENGINE
+ SG_ sigMotorTorque : 16|16@1+ (0.1,-1000) [0|6553.5] "" Vector__XXX
+ SG_ sigMotorEfficiency : 0|10@1+ (0.1,0) [0|102.3] "%" Vector__XXX
+
+BO_ 12 frmSpeedControl: 8 SCCM
+ SG_ sigSpeedControlMode : 15|1@1+ (1,0) [0|0] ""  IC
+ SG_ sigRequestedSpeed : 0|9@1+ (1,0) [0|300] "kmh" Vector__XXX
+
+BO_ 17 frmPedalLinear: 4 PEDAL
+ SG_ sigThrottle : 16|12@1+ (0.1,-30) [-30|100] "%"  SCCM
+ SG_ sigBrakeForce : 0|10@1+ (0.1,0) [0|100] "%"  SCCM
+
+BO_ 11 frmEnergy: 8 BMS
+ SG_ sigMaxEnergyNominal : 48|16@1+ (0.001,0) [0|163.83] "kWh" Vector__XXX
+ SG_ sigRemainingCapacity : 24|20@1+ (0.0001,0) [0|104.8575] "Ah"  IC
+ SG_ sigRemainingEnergy : 0|20@1+ (0.0001,0) [0|104.8575] "kWh"  IC
+
+BO_ 10 frmPrediction: 8 IC
+ SG_ sigEnergyPer100km : 16|16@1- (0.01,0) [-327.68|327.67] "kWh/100km"  IC
+ SG_ sigRemainingDistance : 0|10@1+ (1,0) [0|4095] "km"  IC
+
+BO_ 1288 nmSCCM: 8 SCCM
+
+BO_ 1285 nmPEDAL: 8 PEDAL
+
+BO_ 1303 nmIC: 8 IC
+
+BO_ 1283 nmESC: 8 ESC
+
+BO_ 1282 nmENGINE: 8 ENGINE
+
+BO_ 1281 nmBMS: 8 BMS
+
+BO_ 1314 nmBATTDOC: 8 BATTDOC
+
+BO_ 9 frmOperationMode: 8 SCCM
+ SG_ sigVehicleMode : 8|8@1- (1,0) [0|0] "" Vector__XXX
+ SG_ sigDriveMode : 0|8@1+ (1,0) [0|255] ""  ENGINE,IC
+
+BO_ 151 frmStateBPC_07: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 150 frmStateBPC_06: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 149 frmStateBPC_05: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 148 frmStateBPC_04: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 147 frmStateBPC_03: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 159 frmStateBPC_15: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 158 frmStateBPC_14: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 157 frmStateBPC_13: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 156 frmStateBPC_12: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 155 frmStateBPC_11: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 154 frmStateBPC_10: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 153 frmStateBPC_09: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 152 frmStateBPC_08: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 146 frmStateBPC_02: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 145 frmStateBPC_01: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 144 frmStateBPC_00: 8 BMS
+ SG_ sigPackCapacity : 48|16@1+ (0.01,0) [0|140] "Ah" Vector__XXX
+ SG_ sigCellVoltageMin : 32|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+ SG_ sigCellPackVoltage : 16|13@1+ (0.01,0) [0|81.91] "V"  BATTDOC
+ SG_ sigCellVoltageMax : 0|10@1+ (0.01,0) [0|10.23] "V"  BATTDOC
+
+BO_ 112 frmMaintenance: 8 BATTDOC
+ SG_ sigTargetVoltage : 32|11@1+ (0.01,0) [-10.24|10.23] "V"  BMS
+ SG_ sigBypassBPC_15 : 31|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_14 : 30|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_13 : 29|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_12 : 28|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_11 : 27|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_10 : 26|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_09 : 25|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_08 : 24|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_07 : 23|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_06 : 22|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_05 : 21|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_04 : 20|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_03 : 19|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_02 : 18|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_01 : 17|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBypassBPC_00 : 16|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_15 : 15|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_14 : 14|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_13 : 13|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_12 : 12|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_11 : 11|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_10 : 10|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_09 : 9|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_08 : 8|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_07 : 7|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_06 : 6|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_05 : 5|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_04 : 4|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_03 : 3|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_02 : 2|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_01 : 1|1@1+ (1,0) [0|1] ""  BMS
+ SG_ sigBalanceBPC_00 : 0|1@1+ (1,0) [0|1] ""  BMS
+
+BO_ 8 frmCurrentLimit: 4 BMS
+ SG_ sigDrainLimit : 16|11@1+ (-1,0) [-2047|0] "A"  ENGINE
+ SG_ sigChargeLimit : 0|11@1+ (1,0) [0|2047] "A"  ENGINE
+
+BO_ 135 frmAlarmsBPC_07: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 134 frmAlarmsBPC_06: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 133 frmAlarmsBPC_05: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 132 frmAlarmsBPC_04: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 129 frmAlarmsBPC_01: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 139 frmAlarmsBPC_11: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 143 frmAlarmsBPC_15: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 142 frmAlarmsBPC_14: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 141 frmAlarmsBPC_13: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 131 frmAlarmsBPC_03: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 130 frmAlarmsBPC_02: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 140 frmAlarmsBPC_12: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 138 frmAlarmsBPC_10: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 136 frmAlarmsBPC_08: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 137 frmAlarmsBPC_09: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 128 frmAlarmsBPC_00: 1 BMS
+ SG_ sigAlertCommunication : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigAlertUnbalanced : 7|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertShortcut : 6|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowVoltage : 5|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertLowTemperature : 4|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighVoltage : 3|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertHighTemperature : 2|1@1+ (1,0) [0|1] ""  BATTDOC
+ SG_ sigAlertBypassed : 1|1@1+ (1,0) [0|1] ""  BATTDOC
+
+BO_ 7 frmVIN: 8 SCCM
+ SG_ sigVIN_Padding m2 : 39|32@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ sigVIN_Part3 m2 : 15|24@0+ (1,0) [0|0] ""  PEDAL,IC,ESC,ENGINE,BMS
+ SG_ sigVIN_Part2 m1 : 15|56@0+ (1,0) [0|7.20575940379279E+016] ""  PEDAL,IC,ESC,ENGINE,BMS
+ SG_ sigVIN_Part1 m0 : 15|56@0+ (1,0) [0|0] ""  PEDAL,IC,ESC,ENGINE,BMS
+ SG_ sigVIN_MUX M : 7|8@0+ (1,0) [0|2] ""  PEDAL,IC,ESC,ENGINE,BMS
+
+BO_ 5 frmDynamicMode: 8 SCCM
+ SG_ sigRecuperationLevel : 8|8@1+ (1,0) [0|3] ""  IC,ENGINE
+ SG_ sigAgility : 0|8@1+ (1,0) [0|255] ""  ENGINE,IC
+
+BO_ 6 frmBatteryState: 8 BMS
+ SG_ sigAlertAnyShortcut : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ sigAlertAnyUnbalanced : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ sigAlertAnyLowVoltage : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ sigAlertAnyBypassed : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ sigLowestCellVoltage : 48|10@1+ (0.01,0) [0|10.23] "V" Vector__XXX
+ SG_ sigBatteryVoltage : 24|20@1+ (0.001,0) [0|1048.575] "V" Vector__XXX
+ SG_ sigBatteryState : 0|8@1- (1,0) [0|0] ""  BATTDOC
+ SG_ sigCurrent : 8|16@1- (0.01,200) [-127.68|527.67] "A" Vector__XXX
+ SG_ sigAlertLowTemperature : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ sigAlertHighTemperature : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 4 frmPower: 8 ENGINE
+ SG_ sigEngineCurrent : 32|32@1+ (1E-006,-1500) [-1500|2794.967295] "A"  IC
+ SG_ sigMechanicalPower : 16|16@1- (0.01,0) [-327.68|327.67] "kW"  IC
+ SG_ sigElectricalPower : 0|16@1- (0.01,0) [-327.68|327.67] "kW"  IC
+
+BO_ 3 frmVehicleState: 8 IC
+ SG_ sigTotalKM : 40|24@1+ (1,0) [0|999999] "km" Vector__XXX
+ SG_ sigTripCount : 16|24@1+ (0.0001,0) [0|999.9999] "km" Vector__XXX
+ SG_ sigVehicleSpeed : 0|16@1+ (0.1,0) [0|400] "kmh"  SCCM
+
+BO_ 2 frmWheelSpeed: 8 ESC
+ SG_ sigWheelSpeedRearRight : 48|16@1+ (0.1,0) [0|3000] "1/s"  IC
+ SG_ sigWheelSpeedRearLeft : 32|16@1+ (0.1,0) [0|3000] "1/s"  IC
+ SG_ sigWheelSpeedFrontRight : 16|16@1+ (0.1,0) [0|3000] "1/s"  IC
+ SG_ sigWheelSpeedFrontLeft : 0|16@1+ (0.1,0) [0|3000] "1/s"  IC
+
+BO_ 0 frmPedal: 4 SCCM
+ SG_ sigThrottle : 16|12@1+ (0.1,-30) [-30|100] "%"  ENGINE
+ SG_ sigBrakeForce : 0|10@1+ (0.1,0) [0|100] "%"  ENGINE
+
+BO_ 1 frmEngine: 8 ENGINE
+ SG_ sigAlertControllerPowerLimit : 31|1@1+ (1,0) [0|1] ""  IC
+ SG_ sigAlertControllerCurrentLimit : 30|1@1+ (1,0) [0|1] ""  IC
+ SG_ sigAlertControllerLowVoltage : 29|1@1+ (1,0) [0|1] ""  IC
+ SG_ sigAlertControllerTemperature : 28|1@1+ (1,0) [0|1] ""  IC
+ SG_ sigControllerTemperature : 32|8@1+ (1,-50) [-50|205] "°C" Vector__XXX
+ SG_ sigEngineSpeed : 0|28@1+ (0.0001,0) [0|18000] "rpm"  IC
+
+
+
+EV_ EnvKlemme30: 0 [0|1] "" 1 1 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+EV_ EnvKlemme15: 0 [0|1] "" 0 2 DUMMY_NODE_VECTOR0 Vector__XXX;
+
+BA_DEF_ BO_  "NmAsrMessage" ENUM  "No","Yes";
+BA_DEF_ BU_  "NmAsrNodeIdentifier" HEX 0 255;
+BA_DEF_ BU_  "GenNodSleepTime" INT 0 1000000;
+BA_DEF_ BU_  "NmAsrCanMsgReducedTime" INT 0 0;
+BA_DEF_ BU_  "NmAsrCanMsgCycleOffset" INT 0 0;
+BA_DEF_  "NmAsrBaseAddress" HEX 0 536870911;
+BA_DEF_  "NmAsrMessageCount" INT 1 128;
+BA_DEF_  "GenNWMSleepTime" INT 0 1000000;
+BA_DEF_  "NmAsrCanMsgCycleTime" INT 0 0;
+BA_DEF_  "NmAsrRepeatMessageTime" INT 0 0;
+BA_DEF_  "NmAsrWaitBusSleepTime" INT 0 0;
+BA_DEF_  "NmAsrTimeoutTime" INT 0 0;
+BA_DEF_ BO_  "GenMsgFastOnStart" INT 0 100;
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes","vector_leerstring";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes","vector_leerstring";
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "DatabaseVersion" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 500;
+BA_DEF_ SG_  "NWM_WakeupAllowed" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BU_  "NmNode" ENUM  "no","yes";
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 100;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 50000;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 100;
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 10;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","IfActive","NoMsgSendType","NotUsed","vector_leerstring";
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 100000;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed";
+BA_DEF_ SG_  "GenSigStartValue" FLOAT 0 100000000000;
+BA_DEF_DEF_  "NmAsrMessage" "No";
+BA_DEF_DEF_  "NmAsrNodeIdentifier" 0;
+BA_DEF_DEF_  "GenNodSleepTime" 0;
+BA_DEF_DEF_  "NmAsrCanMsgReducedTime" 6400;
+BA_DEF_DEF_  "NmAsrCanMsgCycleOffset" 0;
+BA_DEF_DEF_  "NmAsrBaseAddress" 1280;
+BA_DEF_DEF_  "NmAsrMessageCount" 64;
+BA_DEF_DEF_  "GenNWMSleepTime" 0;
+BA_DEF_DEF_  "NmAsrCanMsgCycleTime" 640;
+BA_DEF_DEF_  "NmAsrRepeatMessageTime" 3200;
+BA_DEF_DEF_  "NmAsrWaitBusSleepTime" 1500;
+BA_DEF_DEF_  "NmAsrTimeoutTime" 2000;
+BA_DEF_DEF_  "GenMsgFastOnStart" 0;
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "Manufacturer" "Vector PTR";
+BA_DEF_DEF_  "DatabaseVersion" "";
+BA_DEF_DEF_  "NodeLayerModules" "AsrNM33.DLL,CANoeILNLVector.DLL";
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "NWM_WakeupAllowed" "Yes";
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "NmNode" "no";
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 10;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "GenMsgCycleTime" 100;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_ "NmAsrNodeIdentifier" BU_ BATTDOC 34;
+BA_ "NmAsrNodeIdentifier" BU_ SCCM 8;
+BA_ "NmAsrNodeIdentifier" BU_ BMS 1;
+BA_ "NmAsrNodeIdentifier" BU_ IC 23;
+BA_ "NmAsrNodeIdentifier" BU_ ESC 3;
+BA_ "NmAsrNodeIdentifier" BU_ PEDAL 5;
+BA_ "NmAsrNodeIdentifier" BU_ ENGINE 2;
+BA_ "GenMsgCycleTime" BO_ 13 50;
+BA_ "GenMsgStartDelayTime" BO_ 12 67;
+BA_ "GenMsgCycleTime" BO_ 17 25;
+BA_ "GenMsgSendType" BO_ 17 0;
+BA_ "GenMsgStartDelayTime" BO_ 11 34;
+BA_ "GenMsgCycleTime" BO_ 10 250;
+BA_ "GenMsgStartDelayTime" BO_ 10 39;
+BA_ "NmAsrMessage" BO_ 1288 1;
+BA_ "GenMsgSendType" BO_ 1288 8;
+BA_ "GenMsgCycleTime" BO_ 1288 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1288 0;
+BA_ "GenMsgILSupport" BO_ 1288 0;
+BA_ "GenMsgStartDelayTime" BO_ 1288 0;
+BA_ "NmAsrMessage" BO_ 1285 1;
+BA_ "GenMsgSendType" BO_ 1285 8;
+BA_ "GenMsgCycleTime" BO_ 1285 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1285 0;
+BA_ "GenMsgILSupport" BO_ 1285 0;
+BA_ "NmAsrMessage" BO_ 1303 1;
+BA_ "GenMsgSendType" BO_ 1303 8;
+BA_ "GenMsgCycleTime" BO_ 1303 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1303 0;
+BA_ "GenMsgILSupport" BO_ 1303 0;
+BA_ "GenMsgStartDelayTime" BO_ 1303 13;
+BA_ "NmAsrMessage" BO_ 1283 1;
+BA_ "GenMsgSendType" BO_ 1283 8;
+BA_ "GenMsgCycleTime" BO_ 1283 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1283 0;
+BA_ "GenMsgILSupport" BO_ 1283 0;
+BA_ "GenMsgStartDelayTime" BO_ 1283 44;
+BA_ "NmAsrMessage" BO_ 1282 1;
+BA_ "GenMsgSendType" BO_ 1282 8;
+BA_ "GenMsgCycleTime" BO_ 1282 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1282 0;
+BA_ "GenMsgILSupport" BO_ 1282 0;
+BA_ "NmAsrMessage" BO_ 1281 1;
+BA_ "GenMsgSendType" BO_ 1281 8;
+BA_ "GenMsgCycleTime" BO_ 1281 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1281 0;
+BA_ "GenMsgILSupport" BO_ 1281 0;
+BA_ "GenMsgCycleTimeFast" BO_ 1314 0;
+BA_ "GenMsgCycleTime" BO_ 1314 0;
+BA_ "NmAsrMessage" BO_ 1314 1;
+BA_ "GenMsgSendType" BO_ 1314 8;
+BA_ "GenMsgILSupport" BO_ 1314 0;
+BA_ "GenMsgStartDelayTime" BO_ 9 43;
+BA_ "GenMsgCycleTime" BO_ 151 100;
+BA_ "GenMsgSendType" BO_ 151 0;
+BA_ "GenMsgStartDelayTime" BO_ 151 23;
+BA_ "GenMsgCycleTime" BO_ 150 100;
+BA_ "GenMsgSendType" BO_ 150 0;
+BA_ "GenMsgStartDelayTime" BO_ 150 22;
+BA_ "GenMsgCycleTime" BO_ 149 100;
+BA_ "GenMsgSendType" BO_ 149 0;
+BA_ "GenMsgStartDelayTime" BO_ 149 21;
+BA_ "GenMsgCycleTime" BO_ 148 100;
+BA_ "GenMsgSendType" BO_ 148 0;
+BA_ "GenMsgStartDelayTime" BO_ 148 20;
+BA_ "GenMsgCycleTime" BO_ 147 100;
+BA_ "GenMsgSendType" BO_ 147 0;
+BA_ "GenMsgStartDelayTime" BO_ 147 19;
+BA_ "GenMsgCycleTime" BO_ 159 100;
+BA_ "GenMsgSendType" BO_ 159 0;
+BA_ "GenMsgStartDelayTime" BO_ 159 31;
+BA_ "GenMsgCycleTime" BO_ 158 100;
+BA_ "GenMsgSendType" BO_ 158 0;
+BA_ "GenMsgStartDelayTime" BO_ 158 30;
+BA_ "GenMsgCycleTime" BO_ 157 100;
+BA_ "GenMsgSendType" BO_ 157 0;
+BA_ "GenMsgStartDelayTime" BO_ 157 29;
+BA_ "GenMsgCycleTime" BO_ 156 100;
+BA_ "GenMsgSendType" BO_ 156 0;
+BA_ "GenMsgStartDelayTime" BO_ 156 28;
+BA_ "GenMsgCycleTime" BO_ 155 100;
+BA_ "GenMsgSendType" BO_ 155 0;
+BA_ "GenMsgStartDelayTime" BO_ 155 27;
+BA_ "GenMsgCycleTime" BO_ 154 100;
+BA_ "GenMsgSendType" BO_ 154 0;
+BA_ "GenMsgStartDelayTime" BO_ 154 26;
+BA_ "GenMsgCycleTime" BO_ 153 100;
+BA_ "GenMsgSendType" BO_ 153 0;
+BA_ "GenMsgStartDelayTime" BO_ 153 25;
+BA_ "GenMsgCycleTime" BO_ 152 100;
+BA_ "GenMsgSendType" BO_ 152 0;
+BA_ "GenMsgStartDelayTime" BO_ 152 24;
+BA_ "GenMsgCycleTime" BO_ 146 100;
+BA_ "GenMsgSendType" BO_ 146 0;
+BA_ "GenMsgStartDelayTime" BO_ 146 18;
+BA_ "GenMsgCycleTime" BO_ 145 100;
+BA_ "GenMsgSendType" BO_ 145 0;
+BA_ "GenMsgStartDelayTime" BO_ 145 17;
+BA_ "GenMsgCycleTime" BO_ 144 100;
+BA_ "GenMsgSendType" BO_ 144 0;
+BA_ "GenMsgStartDelayTime" BO_ 144 16;
+BA_ "GenMsgCycleTime" BO_ 112 100;
+BA_ "GenMsgSendType" BO_ 112 0;
+BA_ "GenMsgStartDelayTime" BO_ 8 33;
+BA_ "GenMsgSendType" BO_ 8 0;
+BA_ "GenMsgCycleTime" BO_ 8 250;
+BA_ "GenMsgCycleTime" BO_ 135 100;
+BA_ "GenMsgSendType" BO_ 135 0;
+BA_ "GenMsgStartDelayTime" BO_ 135 7;
+BA_ "GenMsgCycleTime" BO_ 134 100;
+BA_ "GenMsgSendType" BO_ 134 0;
+BA_ "GenMsgStartDelayTime" BO_ 134 6;
+BA_ "GenMsgCycleTime" BO_ 133 100;
+BA_ "GenMsgSendType" BO_ 133 0;
+BA_ "GenMsgStartDelayTime" BO_ 133 5;
+BA_ "GenMsgCycleTime" BO_ 132 100;
+BA_ "GenMsgSendType" BO_ 132 0;
+BA_ "GenMsgStartDelayTime" BO_ 132 4;
+BA_ "GenMsgCycleTime" BO_ 129 100;
+BA_ "GenMsgSendType" BO_ 129 0;
+BA_ "GenMsgStartDelayTime" BO_ 129 1;
+BA_ "GenMsgCycleTime" BO_ 139 100;
+BA_ "GenMsgSendType" BO_ 139 0;
+BA_ "GenMsgStartDelayTime" BO_ 139 11;
+BA_ "GenMsgCycleTime" BO_ 143 100;
+BA_ "GenMsgSendType" BO_ 143 0;
+BA_ "GenMsgStartDelayTime" BO_ 143 15;
+BA_ "GenMsgCycleTime" BO_ 142 100;
+BA_ "GenMsgSendType" BO_ 142 0;
+BA_ "GenMsgStartDelayTime" BO_ 142 14;
+BA_ "GenMsgCycleTime" BO_ 141 100;
+BA_ "GenMsgSendType" BO_ 141 0;
+BA_ "GenMsgStartDelayTime" BO_ 141 13;
+BA_ "GenMsgCycleTime" BO_ 131 100;
+BA_ "GenMsgSendType" BO_ 131 0;
+BA_ "GenMsgStartDelayTime" BO_ 131 3;
+BA_ "GenMsgCycleTime" BO_ 130 100;
+BA_ "GenMsgSendType" BO_ 130 0;
+BA_ "GenMsgStartDelayTime" BO_ 130 2;
+BA_ "GenMsgCycleTime" BO_ 140 100;
+BA_ "GenMsgSendType" BO_ 140 0;
+BA_ "GenMsgStartDelayTime" BO_ 140 12;
+BA_ "GenMsgCycleTime" BO_ 138 100;
+BA_ "GenMsgSendType" BO_ 138 0;
+BA_ "GenMsgStartDelayTime" BO_ 138 10;
+BA_ "GenMsgCycleTime" BO_ 136 100;
+BA_ "GenMsgSendType" BO_ 136 0;
+BA_ "GenMsgStartDelayTime" BO_ 136 8;
+BA_ "GenMsgCycleTime" BO_ 137 100;
+BA_ "GenMsgSendType" BO_ 137 0;
+BA_ "GenMsgStartDelayTime" BO_ 137 9;
+BA_ "GenMsgStartDelayTime" BO_ 128 32;
+BA_ "GenMsgCycleTime" BO_ 128 100;
+BA_ "GenMsgSendType" BO_ 128 0;
+BA_ "GenMsgSendType" BO_ 7 8;
+BA_ "GenMsgCycleTime" BO_ 7 0;
+BA_ "GenMsgCycleTimeFast" BO_ 7 0;
+BA_ "GenMsgStartDelayTime" BO_ 7 23;
+BA_ "GenMsgCycleTime" BO_ 5 100;
+BA_ "GenMsgSendType" BO_ 5 0;
+BA_ "GenMsgStartDelayTime" BO_ 5 51;
+BA_ "GenMsgStartDelayTime" BO_ 6 32;
+BA_ "GenMsgCycleTime" BO_ 6 200;
+BA_ "GenMsgSendType" BO_ 6 0;
+BA_ "GenMsgStartDelayTime" BO_ 4 5;
+BA_ "GenMsgCycleTime" BO_ 4 20;
+BA_ "GenMsgSendType" BO_ 4 0;
+BA_ "GenMsgSendType" BO_ 3 0;
+BA_ "GenMsgCycleTime" BO_ 3 25;
+BA_ "GenMsgStartDelayTime" BO_ 3 47;
+BA_ "GenMsgSendType" BO_ 2 0;
+BA_ "GenMsgCycleTime" BO_ 2 25;
+BA_ "GenMsgStartDelayTime" BO_ 2 41;
+BA_ "GenMsgSendType" BO_ 0 0;
+BA_ "GenMsgCycleTime" BO_ 0 25;
+BA_ "GenMsgStartDelayTime" BO_ 0 3;
+BA_ "GenMsgStartDelayTime" BO_ 1 2;
+BA_ "GenMsgSendType" BO_ 1 0;
+BA_ "GenMsgCycleTime" BO_ 1 20;
+BA_ "GenSigStartValue" SG_ 13 sigMotorTorque 10000;
+BA_ "GenSigStartValue" SG_ 17 sigThrottle 300;
+BA_ "GenSigStartValue" SG_ 9 sigVehicleMode 2;
+BA_ "GenSigStartValue" SG_ 151 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 151 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 150 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 150 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 149 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 149 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 148 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 148 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 147 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 147 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 159 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 159 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 158 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 158 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 157 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 157 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 156 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 156 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 155 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 155 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 154 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 154 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 153 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 153 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 152 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 152 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 146 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 146 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 145 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 145 sigCellVoltageMax 3.6;
+BA_ "GenSigStartValue" SG_ 144 sigCellVoltageMin 3.6;
+BA_ "GenSigStartValue" SG_ 144 sigCellVoltageMax 3.6;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_15 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_14 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_13 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_12 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_11 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_10 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_09 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_08 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_07 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_06 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_05 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_04 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_03 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_02 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_01 5;
+BA_ "GenSigSendType" SG_ 112 sigBypassBPC_00 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_15 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_14 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_13 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_12 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_11 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_10 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_09 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_08 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_07 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_06 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_05 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_04 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_03 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_02 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_01 5;
+BA_ "GenSigSendType" SG_ 112 sigBalanceBPC_00 5;
+BA_ "GenSigSendType" SG_ 7 sigVIN_Padding 7;
+BA_ "GenSigSendType" SG_ 7 sigVIN_Part3 7;
+BA_ "GenSigSendType" SG_ 7 sigVIN_Part2 7;
+BA_ "GenSigSendType" SG_ 7 sigVIN_Part1 7;
+BA_ "GenSigSendType" SG_ 7 sigVIN_MUX 1;
+BA_ "GenSigStartValue" SG_ 5 sigAgility 2;
+BA_ "GenSigStartValue" SG_ 6 sigCurrent 0;
+BA_ "GenSigStartValue" SG_ 4 sigEngineCurrent 2000000000;
+BA_ "GenSigStartValue" SG_ 0 sigThrottle 300;
+BA_ "GenSigStartValue" SG_ 1 sigControllerTemperature 50;
+VAL_ 12 sigSpeedControlMode 1 "ON" 0 "OFF" ;
+VAL_ 9 sigVehicleMode 2 "RUN" 1 "LIVING" 0 "OFF" ;
+VAL_ 9 sigDriveMode 255 "ERROR" 3 "DRIVE" 2 "NEUTRAL" 1 "REVERSE" 0 "PARKING" ;
+VAL_ 112 sigBypassBPC_15 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_14 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_13 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_12 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_11 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_10 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_09 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_08 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_07 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_06 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_05 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_04 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_03 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_02 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_01 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBypassBPC_00 1 "BRIDGED" 0 "NORMAL" ;
+VAL_ 112 sigBalanceBPC_15 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_14 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_13 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_12 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_11 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_10 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_09 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_08 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_07 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_06 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_05 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_04 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_03 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_02 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_01 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 112 sigBalanceBPC_00 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 135 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 134 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 133 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 132 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 129 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 139 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 143 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 142 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 141 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 131 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 130 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 140 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 138 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 136 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 137 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertCommunication 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertHighVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 128 sigAlertBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 5 sigRecuperationLevel 255 "ERROR" 2 "maximum" 1 "medium" 0 "none" ;
+VAL_ 5 sigAgility 255 "ERROR" 2 "sport" 1 "comfort" 0 "eco" ;
+VAL_ 6 sigAlertAnyShortcut 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 6 sigAlertAnyUnbalanced 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 6 sigAlertAnyLowVoltage 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 6 sigAlertAnyBypassed 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 6 sigBatteryState 7 "INTERNAL_FAILURE" 6 "CHARGE_STATE_FULL" 5 "CHARGE_STATE_NORMAL" 4 "CHARGE_STATE_CRITICAL" 3 "FATAL_BYPASSED" 2 "FATAL_SHORTCUT" 1 "FATAL_DEEPLY_DISCHARGED" 0 "LOCKED" ;
+VAL_ 6 sigAlertLowTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+VAL_ 6 sigAlertHighTemperature 1 "ACTIVE" 0 "INACTIVE" ;
+
